@@ -12,7 +12,10 @@ export const loginGoogle = createAsyncThunk(
         .get(`${API_URL}/auth/google/success`, {
           withCredentials: true,
         })
-        .then((res) => res);
+        .then((res) => {
+          console.log(res);
+          return res;
+        });
       if (response.status !== 200) {
         throw new Error("Server Error!");
       }

@@ -15,7 +15,7 @@ const MainPage = () => {
   useEffect(() => {
     dispatch(getReviews(params));
     dispatch(getProducts());
-  }, []);
+  }, [params]);
   if (reviews && Array.isArray(reviews))
     return (
       <Container maxWidth="sm" sx={{ my: 2 }}>

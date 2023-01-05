@@ -82,13 +82,13 @@ const PostPage = () => {
   }, []);
 
   useEffect(() => {
-    const r = review?.likes.includes(user._id);
+    const r = review?.likes.includes(user?._id);
     if (review) dispatch(getProducts({ id: review?.product_id }));
     setLiked(r);
   }, [review]);
 
   useEffect(() => {
-    const p = product?.rating.filter((f) => f.user_id === user._id)[0]?.value;
+    const p = product?.rating.filter((f) => f.user_id === user?._id)[0]?.value;
     console.log(typeof p);
     setRating(p);
   }, [product]);
