@@ -4,9 +4,10 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import MyButton from "../MyButton.jsx";
-import { Divider } from "@mui/material";
 import { Google } from "@mui/icons-material";
 import discord from "../../assets/discord-icon.svg";
+
+const API_URL = import.meta.env.VITE_REACT_API_URL;
 
 const style = {
   position: "absolute",
@@ -65,9 +66,7 @@ export default function LoginModal() {
               variant="contained"
               color="inherit"
               sx={{ mb: 2 }}
-              onClick={() =>
-                window.open("http://localhost:3001/auth/google", "_self")
-              }
+              onClick={() => window.open(`${API_URL}/auth/google`, "_self")}
             >
               <Google />
             </Button>
@@ -75,9 +74,7 @@ export default function LoginModal() {
               fullWidth
               variant="contained"
               color="inherit"
-              onClick={() =>
-                window.open("http://localhost:3001/auth/discord", "_self")
-              }
+              onClick={() => window.open(`${API_URL}/auth/discord`, "_self")}
             >
               <img
                 alt="discord"
