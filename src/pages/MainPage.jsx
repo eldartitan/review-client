@@ -16,6 +16,7 @@ const MainPage = () => {
     dispatch(getReviews(params));
     dispatch(getProducts());
   }, []);
+
   if (reviews && Array.isArray(reviews))
     return (
       <Container maxWidth="sm" sx={{ my: 2 }}>
