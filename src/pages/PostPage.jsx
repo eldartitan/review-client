@@ -33,10 +33,10 @@ const PostPage = () => {
   const { user } = useSelector((state) => state.user);
   const { review, error } = useSelector((state) => state.review);
   const { product, comments, categories } = useSelector((state) => state.other);
+  const liked = review?.likes.includes(user?._id);
 
   const category = categories?.filter((f) => f._id === review?.category)[0];
 
-  const [liked, setLiked] = useState(false);
   const [focus, setFocus] = useState(false);
   const [rating, setRating] = useState(0);
   const [commentInput, setCommentInput] = useState("");
@@ -81,9 +81,7 @@ const PostPage = () => {
   }, []);
 
   useEffect(() => {
-    const r = review?.likes.includes(user?._id);
     if (review) dispatch(getProducts({ id: review?.product_id }));
-    if (r) setLiked(r);
   }, [review]);
 
   useEffect(() => {
