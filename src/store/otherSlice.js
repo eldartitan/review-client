@@ -38,6 +38,7 @@ export const otherSlice = createSlice({
       .addCase(productRating.pending, (state) => pending(state))
       .addCase(productRating.fulfilled, (state, action) => {
         loadFalseErrNull(state);
+        state.product = action.payload;
       })
       .addCase(getCategories.pending, (state) => pending(state))
       .addCase(getCategories.fulfilled, (state, action) => {

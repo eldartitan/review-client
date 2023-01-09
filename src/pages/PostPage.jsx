@@ -33,12 +33,14 @@ const PostPage = () => {
   const { user } = useSelector((state) => state.user);
   const { review, error } = useSelector((state) => state.review);
   const { product, comments, categories } = useSelector((state) => state.other);
-  const liked = review?.likes.includes(user?._id);
 
+  const liked = review?.likes.includes(user?._id);
+  const rating = product?.rating.filter((f) => f.user_id === user?._id)[0]
+    ?.value;
+  console.log(rating, "RATING");
   const category = categories?.filter((f) => f._id === review?.category)[0];
 
   const [focus, setFocus] = useState(false);
-  const [rating, setRating] = useState(0);
   const [commentInput, setCommentInput] = useState("");
 
   const handleClick = () => {
@@ -83,12 +85,6 @@ const PostPage = () => {
   useEffect(() => {
     if (review) dispatch(getProducts({ id: review?.product_id }));
   }, [review]);
-
-  useEffect(() => {
-    const pRating = product?.rating.filter((f) => f.user_id === user?._id)[0]
-      ?.value;
-    if (pRating) setRating(pRating);
-  }, [product]);
 
   if (review)
     return (
@@ -139,18 +135,20 @@ const PostPage = () => {
                 >
                   Users average rating: {product?.rating_avg}
                 </Typography>
-                <Typography
-                  variant="body1"
-                  sx={{ alignItems: "center", display: "inline" }}
-                >
-                  Your rating:{" "}
-                  <Rating
-                    onChange={(event) => handleChange(event)}
-                    value={Number(rating)}
-                    max={5}
-                    size="small"
-                  />
-                </Typography>
+                {user && (
+                  <Typography
+                    variant="body1"
+                    sx={{ alignItems: "center", display: "inline" }}
+                  >
+                    Your rating:{" "}
+                    <Rating
+                      onChange={(event) => handleChange(event)}
+                      value={Number(rating)}
+                      max={5}
+                      size="small"
+                    />
+                  </Typography>
+                )}
               </Stack>
               <MyButton onClick={handleLikeClick}>
                 <Stack

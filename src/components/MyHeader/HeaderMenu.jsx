@@ -58,7 +58,9 @@ export default function HeaderMenu() {
           style={{ textDecoration: "none", color: "inherit" }}
           to={"/my-page"}
         >
-          <MenuItem sx={{ textAlign: "center" }}>My page</MenuItem>
+          <MenuItem sx={{ textAlign: "center" }} onClick={handleClose}>
+            My page
+          </MenuItem>
         </NavLink>
         <MenuItem onClick={handleLogout}>
           <ListItemIcon>
