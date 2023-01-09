@@ -95,129 +95,127 @@ const PostPage = () => {
   if (review)
     return (
       <>
-        {!loading && (
-          <Container maxWidth="md" sx={{ mt: 3, fontFamily: "Roboto" }}>
-            <Stack spacing={1}>
-              <Stack direction="row" spacing={1}>
-                <Typography fontWeight={700} variant="caption">
-                  {review.username}
-                </Typography>
-                <Typography variant="caption">
-                  posted {formatFromNow(review.createdAt)}
-                </Typography>
-              </Stack>
-
-              <Typography variant={"h6"}>{review.title}</Typography>
-
-              <TagsPanel tags={review.tags} />
-
-              <Typography variant="body2" whiteSpace="pre-line">
-                {review.text}
+        <Container maxWidth="md" sx={{ mt: 3, fontFamily: "Roboto" }}>
+          <Stack spacing={1}>
+            <Stack direction="row" spacing={1}>
+              <Typography fontWeight={700} variant="caption">
+                {review.username}
               </Typography>
-              <SimpleSlider images={review.images} />
-              <Stack
-                alignItems="center"
-                justifyContent="space-between"
-                direction="row"
-              >
-                <Stack>
-                  <Typography sx={{ display: "flex", alignItems: "center" }}>
-                    {product?.value} &#183; {category?.value}{" "}
-                  </Typography>
-                  <Typography
-                    variant="body1"
-                    sx={{ alignItems: "center", display: "inline" }}
-                  >
-                    Review rating:
-                    <Rating
-                      defaultValue={review.user_rating}
-                      max={10}
-                      readOnly
-                      size="small"
-                    />
-                  </Typography>
-                  <Typography
-                    variant="body1"
-                    sx={{ alignItems: "center", display: "inline" }}
-                  >
-                    Users average rating: {product?.rating_avg}
-                  </Typography>
-                  <Typography
-                    variant="body1"
-                    sx={{ alignItems: "center", display: "inline" }}
-                  >
-                    Your rating:{" "}
-                    <Rating
-                      onChange={(event) => handleChange(event)}
-                      value={Number(rating)}
-                      max={5}
-                      size="small"
-                    />
-                  </Typography>
-                </Stack>
-                <MyButton onClick={handleLikeClick}>
-                  <Stack
-                    direction="row"
-                    alignItems="center"
-                    spacing={1}
-                    sx={liked ? { color: "#ff4500" } : null}
-                  >
-                    {liked ? (
-                      <Favorite sx={{ height: 22, width: 22 }} />
-                    ) : (
-                      <FavoriteBorderOutlined sx={{ height: 22, width: 22 }} />
-                    )}
-                    <span>{review.likes.length}</span>
-                  </Stack>
-                </MyButton>
+              <Typography variant="caption">
+                posted {formatFromNow(review.createdAt)}
+              </Typography>
+            </Stack>
+
+            <Typography variant={"h6"}>{review.title}</Typography>
+
+            <TagsPanel tags={review.tags} />
+
+            <Typography variant="body2" whiteSpace="pre-line">
+              {review.text}
+            </Typography>
+            <SimpleSlider images={review.images} />
+            <Stack
+              alignItems="center"
+              justifyContent="space-between"
+              direction="row"
+            >
+              <Stack>
+                <Typography sx={{ display: "flex", alignItems: "center" }}>
+                  {product?.value} &#183; {category?.value}{" "}
+                </Typography>
+                <Typography
+                  variant="body1"
+                  sx={{ alignItems: "center", display: "inline" }}
+                >
+                  Review rating:
+                  <Rating
+                    defaultValue={review.user_rating}
+                    max={10}
+                    readOnly
+                    size="small"
+                  />
+                </Typography>
+                <Typography
+                  variant="body1"
+                  sx={{ alignItems: "center", display: "inline" }}
+                >
+                  Users average rating: {product?.rating_avg}
+                </Typography>
+                <Typography
+                  variant="body1"
+                  sx={{ alignItems: "center", display: "inline" }}
+                >
+                  Your rating:{" "}
+                  <Rating
+                    onChange={(event) => handleChange(event)}
+                    value={Number(rating)}
+                    max={5}
+                    size="small"
+                  />
+                </Typography>
               </Stack>
-            </Stack>
-            <Stack sx={{ mt: 2, mb: 6 }} spacing={2}>
-              <Typography>{comments?.length} comments</Typography>
-              <Input
-                placeholder="Add a comment..."
-                multiline
-                value={commentInput}
-                onChange={(e) => setCommentInput(e.target.value)}
-                onFocus={() => {
-                  if (!focus) setFocus(true);
-                  console.log(focus);
-                }}
-              />
-              <Box display={focus ? "flex" : "none"} justifyContent="flex-end">
-                <Button
-                  color="inherit"
-                  size="small"
-                  sx={{ mr: 1 }}
-                  onClick={handleClickCansel}
+              <MyButton onClick={handleLikeClick}>
+                <Stack
+                  direction="row"
+                  alignItems="center"
+                  spacing={1}
+                  sx={liked ? { color: "#ff4500" } : null}
                 >
-                  Cansel
-                </Button>
-                <Button
-                  color="inherit"
-                  size="small"
-                  onClick={handleClick}
-                  disabled={commentInput.length === 0}
-                >
-                  Comment
-                </Button>
-              </Box>
-              {comments?.map((comment) => (
-                <Stack spacing={1} key={comment._id}>
-                  <Stack direction="row" spacing={1}>
-                    <Typography fontWeight={700} variant="caption">
-                      {comment.username}
-                    </Typography>
-                    <Typography variant="caption">
-                      {formatFromNow(comment.createdAt)}
-                    </Typography>
-                  </Stack>
-                  <Typography variant="body2">{comment.text}</Typography>
+                  {liked ? (
+                    <Favorite sx={{ height: 22, width: 22 }} />
+                  ) : (
+                    <FavoriteBorderOutlined sx={{ height: 22, width: 22 }} />
+                  )}
+                  <span>{review.likes.length}</span>
                 </Stack>
-              ))}
+              </MyButton>
             </Stack>
-          </Container>
-        )}
+          </Stack>
+          <Stack sx={{ mt: 2, mb: 6 }} spacing={2}>
+            <Typography>{comments?.length} comments</Typography>
+            <Input
+              placeholder="Add a comment..."
+              multiline
+              value={commentInput}
+              onChange={(e) => setCommentInput(e.target.value)}
+              onFocus={() => {
+                if (!focus) setFocus(true);
+                console.log(focus);
+              }}
+            />
+            <Box display={focus ? "flex" : "none"} justifyContent="flex-end">
+              <Button
+                color="inherit"
+                size="small"
+                sx={{ mr: 1 }}
+                onClick={handleClickCansel}
+              >
+                Cansel
+              </Button>
+              <Button
+                color="inherit"
+                size="small"
+                onClick={handleClick}
+                disabled={commentInput.length === 0}
+              >
+                Comment
+              </Button>
+            </Box>
+            {comments?.map((comment) => (
+              <Stack spacing={1} key={comment._id}>
+                <Stack direction="row" spacing={1}>
+                  <Typography fontWeight={700} variant="caption">
+                    {comment.username}
+                  </Typography>
+                  <Typography variant="caption">
+                    {formatFromNow(comment.createdAt)}
+                  </Typography>
+                </Stack>
+                <Typography variant="body2">{comment.text}</Typography>
+              </Stack>
+            ))}
+          </Stack>
+        </Container>
       </>
     );
 };
