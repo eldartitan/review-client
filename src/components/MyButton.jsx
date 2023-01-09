@@ -12,7 +12,6 @@ const MyButton = styled(Button)({
   borderRadius: 24,
   "&:hover": {
     backgroundColor: "#edeff1",
-    // borderColor: "#0062cc",
     borderRadius: 24,
     boxShadow: "none",
     color: "#222222",

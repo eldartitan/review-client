@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import {
@@ -16,13 +16,7 @@ import MyAutocompleteProduct from "../components/CreatePost/MyAutocompleteProduc
 import MyImageList from "../components/CreatePost/MyImageList.jsx";
 import SelectCats from "../components/CreatePost/SelectCats";
 import { postReview } from "../store/thunks/reviewThunk.js";
-import {
-  ref,
-  uploadBytes,
-  getDownloadURL,
-  listAll,
-  list,
-} from "firebase/storage";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { storage } from "../firebase.js";
 import { v4 } from "uuid";
 
@@ -38,8 +32,6 @@ export default function CreatePost() {
   const [product, setProduct] = useState("");
   const [imageUpload, setImageUpload] = useState(null);
   const [imageUrls, setImageUrls] = useState([]);
-  console.log(cats);
-  // console.log(imageUpload);
 
   const imagesListRef = ref(storage, "images/");
   const uploadFile = () => {
@@ -51,6 +43,10 @@ export default function CreatePost() {
       });
     });
   };
+
+  useEffect(() => {
+    uploadFile();
+  }, [imageUpload]);
 
   const handleSubmit = (event) => {
     event.preventDefault();

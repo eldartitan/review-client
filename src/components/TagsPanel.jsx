@@ -1,11 +1,11 @@
 import { Chip, Stack, Box } from "@mui/material";
 import { AssessmentOutlined, RocketOutlined } from "@mui/icons-material";
 import { useLocation } from "react-router";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getTags } from "../store/thunks/otherThunk.js";
 import { getReviews } from "../store/thunks/reviewThunk.js";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 export default function TagsPanel(props) {
   const dispatch = useDispatch();
@@ -16,8 +16,6 @@ export default function TagsPanel(props) {
   const cLocate = location.pathname.includes("/c/")
     ? `${location.pathname.split("/t/")[0]}/t`
     : "";
-
-  // console.log(location);
 
   const handleClick = (params) => {
     dispatch(getReviews(params));
@@ -39,7 +37,7 @@ export default function TagsPanel(props) {
       <Stack direction="row" spacing={1} sx={{ display: "inline-block" }}>
         {location.pathname.includes("/review/") ? (
           props.tags?.map((tag) => (
-            <Link
+            <NavLink
               key={tag}
               to={`/${tag}`}
               style={{ textDecoration: "none" }}
@@ -52,7 +50,7 @@ export default function TagsPanel(props) {
                 color={"default"}
                 onClick={() => console.log({ tags: tag }, "TAGS VALUE")}
               />
-            </Link>
+            </NavLink>
           ))
         ) : (
           <>
@@ -72,7 +70,7 @@ export default function TagsPanel(props) {
             />
 
             {tags?.map((tag) => (
-              <Link
+              <NavLink
                 key={tag._id}
                 to={`${cLocate}/${tag.value}`}
                 style={{ textDecoration: "none" }}
@@ -85,7 +83,7 @@ export default function TagsPanel(props) {
                   color={"default"}
                   onClick={() => console.log({ tags: tag.value }, "TAGS VALUE")}
                 />
-              </Link>
+              </NavLink>
             ))}
           </>
         )}

@@ -1,22 +1,15 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useMemo } from "react";
+import { useEffect } from "react";
 import { getReviews } from "../store/thunks/reviewThunk.js";
 import { getProducts } from "../store/thunks/otherThunk.js";
-import { useLocation, useParams } from "react-router";
-import {
-  Grid,
-  Container,
-  LinearProgress,
-  Box,
-  Typography,
-} from "@mui/material";
+import { useLocation } from "react-router";
+import { Grid, Container } from "@mui/material";
 import TagsPanel from "../components/TagsPanel.jsx";
 import MyCard from "../components/MyCard/index.jsx";
 
 const MainPage = () => {
   const dispatch = useDispatch();
   const location = useLocation();
-  // console.log(location);
 
   const { reviews, loading, error } = useSelector((state) => state.review);
 

@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 const API_URL = import.meta.env.VITE_REACT_API_URL;
@@ -20,6 +20,7 @@ export const getReviews = createAsyncThunk(
             tags: data?.tags,
             category: data?.category,
             text: data?.text,
+            user_id: data?.user_id,
           },
         })
         .then((res) => res);

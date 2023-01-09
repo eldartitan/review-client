@@ -2,7 +2,7 @@ import { Autocomplete, Chip, TextField } from "@mui/material";
 import { useSelector } from "react-redux";
 
 export default function MyAutocompleteTags({ setTags, tagsLocal }) {
-  const { tags, error } = useSelector((state) => state.review);
+  const { tags, error } = useSelector((state) => state.other);
 
   const handleChange = (event, value) => {
     console.log(value, "tags");

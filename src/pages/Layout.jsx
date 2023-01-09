@@ -1,7 +1,6 @@
 import { Outlet, useLocation } from "react-router";
 import { useEffect } from "react";
 import MyHeader from "../components/MyHeader/index.jsx";
-import { Box, Container, LinearProgress, Typography } from "@mui/material";
 import { useSelector } from "react-redux";
 import Loading from "../components/Loading";
 
@@ -20,17 +19,6 @@ const Layout = () => {
     <>
       {loadingReview && <Loading />}
       <MyHeader />
-      {/*{errorReview ? (*/}
-      {/*  <Container*/}
-      {/*    sx={{ display: "flex", justifyContent: "center", m: "auto" }}*/}
-      {/*  >*/}
-      {/*    <Typography variant="body1" fontStyle="italic">*/}
-      {/*      Something get wrong...*/}
-      {/*    </Typography>*/}
-      {/*  </Container>*/}
-      {/*) : (*/}
-      {/*  <Outlet />*/}
-      {/*)}*/}
       <Outlet />
     </>
   );

@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import { Autocomplete, TextField } from "@mui/material";
 
 export default function SelectCats({ setCats }) {
-  const { categories, error } = useSelector((state) => state.review);
+  const { categories, error } = useSelector((state) => state.other);
 
   const handleChange = (event, value) => {
     console.log(value, event.target.value);

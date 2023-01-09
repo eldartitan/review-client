@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import { isError } from "./utils.js";
 
 const API_URL = import.meta.env.VITE_REACT_API_URL;
 
@@ -70,13 +71,9 @@ const initialState = {
   user: null,
 };
 
-function isError(action) {
-  return action.type.endsWith("rejected");
-}
-
-function loadAndError(state, loading, error, user = null) {
-  state.loading = true;
-  state.error = null;
+function loadAndError(state, loading = false, error, user = null) {
+  state.loading = loading;
+  state.error = error;
   state.user = user;
 }
 

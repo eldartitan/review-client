@@ -7,7 +7,7 @@ const filter = createFilterOptions();
 
 export default function MyAutocompleteProduct({ setProduct }) {
   const [value, setValue] = useState(null);
-  const { products, error } = useSelector((state) => state.review);
+  const { products, error } = useSelector((state) => state.other);
 
   useEffect(() => {
     setProduct(value?.value);

@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 import {
@@ -24,9 +24,8 @@ import {
   postComment,
   productRating,
 } from "../store/thunks/otherThunk.js";
-
 import TagsPanel from "../components/TagsPanel";
-import { formatDate } from "../utils/index.js";
+import { formatFromNow } from "../utils/index.js";
 
 const PostPage = () => {
   const dispatch = useDispatch();
@@ -36,7 +35,6 @@ const PostPage = () => {
   const { product, comments, categories } = useSelector((state) => state.other);
 
   const category = categories?.filter((f) => f._id === review?.category)[0];
-  // console.log(review);
 
   const [liked, setLiked] = useState(false);
   const [focus, setFocus] = useState(false);
@@ -103,7 +101,7 @@ const PostPage = () => {
               {review.username}
             </Typography>
             <Typography variant="caption">
-              posted {formatDate(review.createdAt)}
+              posted {formatFromNow(review.createdAt)}
             </Typography>
           </Stack>
 
@@ -209,7 +207,7 @@ const PostPage = () => {
                   {comment.username}
                 </Typography>
                 <Typography variant="caption">
-                  {formatDate(comment.createdAt)}
+                  {formatFromNow(comment.createdAt)}
                 </Typography>
               </Stack>
               <Typography variant="body2">{comment.text}</Typography>

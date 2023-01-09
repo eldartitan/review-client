@@ -32,24 +32,12 @@ export default function MyImageList({
           item
           alignItems="center"
           justifyContent="center"
-          sx={{ display: "flex" }}
+          sx={{ display: "flex", position: "relative" }}
           key={url}
         >
           <img width={120} src={url} alt="image" />
         </Grid>
       ))}
-      <Grid
-        item
-        width={125}
-        height={120}
-        alignItems="center"
-        justifyContent="center"
-        sx={{ display: "flex" }}
-      >
-        <MyButton component="label" onClick={uploadFile}>
-          <Typography>Add {imageUpload?.length} image</Typography>
-        </MyButton>
-      </Grid>
     </Grid>
   );
 }

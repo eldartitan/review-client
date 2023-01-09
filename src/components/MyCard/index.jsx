@@ -2,19 +2,16 @@ import InfoBlock from "./InfoBlock";
 import ContentBock from "./ContentBock";
 import ButtonsBlock from "./ButtonsBlock";
 import Box from "@mui/material/Box";
-import { Card } from "@mui/material";
 
 export default function MyCard(props) {
   return (
     <Box
       sx={{
-        // border: "1px solid #878A8C",
         borderRadius: 1,
         color: "#898989",
       }}
     >
       <InfoBlock
-        category_id={props.data.category}
         username={props.data.username}
         created={props.data.createdAt}
         product_id={props.data.product_id}

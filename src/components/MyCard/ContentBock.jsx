@@ -1,5 +1,5 @@
 import { Box, Typography, CardMedia, Stack } from "@mui/material";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import TextWithBlur from "../TextWithBlur.jsx";
 
 export default function ContentBock({ text, title, images, id }) {

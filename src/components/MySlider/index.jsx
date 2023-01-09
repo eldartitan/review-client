@@ -1,9 +1,8 @@
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import "./slick.css";
 import { useRef } from "react";
-import { Box, Card, CardMedia } from "@mui/material";
+import { Box } from "@mui/material";
 
 function SampleNextArrow(props) {
   const { className, style, onClick } = props;

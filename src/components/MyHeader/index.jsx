@@ -10,7 +10,7 @@ import {
   Select,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import MySearch from "../MySearch/index.jsx";
 import LoginModal from "./LoginModal.jsx";
 import MyButton from "../MyButton.jsx";
@@ -19,7 +19,6 @@ import HeaderMenu from "./HeaderMenu";
 import { useDispatch, useSelector } from "react-redux";
 import { loginGoogle } from "../../store/authSlice.js";
 import { getCategories } from "../../store/thunks/otherThunk.js";
-import Loading from "../Loading.jsx";
 import { useLocation } from "react-router";
 
 export default function MyHeader() {
@@ -45,16 +44,7 @@ export default function MyHeader() {
   }, []);
 
   return (
-    <Toolbar
-      sx={
-        {
-          // display: "flex",
-          // background: "white",
-          // color: "black",
-          // position: "relative",
-        }
-      }
-    >
+    <Toolbar>
       <Stack direction="row" alignItems="center" spacing={1}>
         <MyDrawer />
         <Box

@@ -1,12 +1,14 @@
 import Box from "@mui/material/Box";
 import { KeyboardArrowDown, Logout, PersonOutline } from "@mui/icons-material";
-import { ListItemIcon, Menu, MenuItem } from "@mui/material";
+import { ListItemIcon, Menu, MenuItem, Typography } from "@mui/material";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../store/authSlice.js";
+import { NavLink } from "react-router-dom";
 
 export default function HeaderMenu() {
   const dispatch = useDispatch();
+  const { user, loading, error } = useSelector((state) => state.user);
 
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
@@ -52,9 +54,12 @@ export default function HeaderMenu() {
           "aria-labelledby": "basic-button",
         }}
       >
-        <MenuItem onClick={handleClose} sx={{ textAlign: "center" }}>
-          My page
-        </MenuItem>
+        <NavLink
+          style={{ textDecoration: "none", color: "inherit" }}
+          to={"/my-page"}
+        >
+          <MenuItem sx={{ textAlign: "center" }}>My page</MenuItem>
+        </NavLink>
         <MenuItem onClick={handleLogout}>
           <ListItemIcon>
             <Logout fontSize="small" />
