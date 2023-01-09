@@ -4,38 +4,39 @@ import { useParams } from "react-router";
 import {
   Button,
   Input,
-  Link,
   Rating,
   Stack,
   Typography,
   Container,
   Box,
-  Chip,
 } from "@mui/material";
 import { Favorite, FavoriteBorderOutlined } from "@mui/icons-material";
 import SimpleSlider from "../components/MySlider";
 import MyButton from "../components/MyButton.jsx";
 import {
-  getComments,
-  getProducts,
   getReviews,
   likeReview,
+  removeLikeReview,
+} from "../store/thunks/reviewThunk.js";
+import {
+  getComments,
+  getProducts,
   postComment,
   productRating,
-  removeLikeReview,
-} from "../store/reviewSlice.js";
+} from "../store/thunks/otherThunk.js";
+
 import TagsPanel from "../components/TagsPanel";
-import { average, formatDate } from "../utils/index.js";
+import { formatDate } from "../utils/index.js";
 
 const PostPage = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
   const { user } = useSelector((state) => state.user);
-  const { review, product, comments, categories, loading, error } = useSelector(
-    (state) => state.review
-  );
+  const { review } = useSelector((state) => state.review);
+  const { product, comments, categories } = useSelector((state) => state.other);
+
   const category = categories?.filter((f) => f._id === review?.category)[0];
-  console.log(review);
+  // console.log(review);
 
   const [liked, setLiked] = useState(false);
   const [focus, setFocus] = useState(false);
@@ -84,13 +85,13 @@ const PostPage = () => {
   useEffect(() => {
     const r = review?.likes.includes(user?._id);
     if (review) dispatch(getProducts({ id: review?.product_id }));
-    setLiked(r);
+    if (r) setLiked(r);
   }, [review]);
 
   useEffect(() => {
-    const p = product?.rating.filter((f) => f.user_id === user?._id)[0]?.value;
-    console.log(typeof p);
-    setRating(p);
+    const pRating = product?.rating.filter((f) => f.user_id === user?._id)[0]
+      ?.value;
+    if (pRating) setRating(pRating);
   }, [product]);
 
   if (review)
@@ -172,7 +173,7 @@ const PostPage = () => {
           </Stack>
         </Stack>
         <Stack sx={{ mt: 2, mb: 6 }} spacing={2}>
-          <Typography>{comments.length} comments</Typography>
+          <Typography>{comments?.length} comments</Typography>
           <Input
             placeholder="Add a comment..."
             multiline

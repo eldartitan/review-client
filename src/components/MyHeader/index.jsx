@@ -8,10 +8,9 @@ import {
   Stack,
   FormControl,
   Select,
-  AppBar,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import MySearch from "../MySearch/index.jsx";
 import LoginModal from "./LoginModal.jsx";
 import MyButton from "../MyButton.jsx";
@@ -19,12 +18,20 @@ import MyDrawer from "./MyDrawer.jsx";
 import HeaderMenu from "./HeaderMenu";
 import { useDispatch, useSelector } from "react-redux";
 import { loginGoogle } from "../../store/authSlice.js";
-import { getCategories } from "../../store/reviewSlice.js";
+import { getCategories } from "../../store/thunks/otherThunk.js";
+import Loading from "../Loading.jsx";
+import { useLocation } from "react-router";
 
 export default function MyHeader() {
   const dispatch = useDispatch();
+  const location = useLocation();
+  console.log(location);
   const { user, loading, error } = useSelector((state) => state.user);
-  const { categories } = useSelector((state) => state.review);
+  const {
+    categories,
+    loading: loadingReview,
+    error: errorReview,
+  } = useSelector((state) => state.other);
 
   const [lang, setLang] = useState("EN");
 
@@ -44,6 +51,7 @@ export default function MyHeader() {
           // display: "flex",
           // background: "white",
           // color: "black",
+          // position: "relative",
         }
       }
     >
@@ -57,7 +65,7 @@ export default function MyHeader() {
             },
           }}
         >
-          <Link
+          <NavLink
             to={"/"}
             style={{
               width: "86px",
@@ -73,7 +81,7 @@ export default function MyHeader() {
             <Typography fontWeight={700} color="white">
               Reviews
             </Typography>
-          </Link>
+          </NavLink>
         </Box>
       </Stack>
       <MySearch />
@@ -94,13 +102,22 @@ export default function MyHeader() {
           }}
         >
           {categories?.map((cat) => (
-            <Link
+            <NavLink
               key={cat._id}
               to={`/c/${cat.value}`}
-              style={{ textDecoration: "none", color: "inherit" }}
+              state={{ category: cat.value }}
+              style={({ isActive }) =>
+                isActive
+                  ? {
+                      textDecoration: "none",
+                      color: "inherit",
+                      borderBottom: "2px solid #222222",
+                    }
+                  : { textDecoration: "none", color: "#222222" }
+              }
             >
               <Typography>{cat.value}</Typography>
-            </Link>
+            </NavLink>
           ))}
         </Stack>
       </Box>
@@ -132,7 +149,7 @@ export default function MyHeader() {
               },
             }}
           >
-            <Link
+            <NavLink
               to={"/create"}
               style={{ textDecoration: "none", color: "inherit" }}
             >
@@ -153,7 +170,7 @@ export default function MyHeader() {
                   Create
                 </Typography>
               </MyButton>
-            </Link>
+            </NavLink>
           </Box>
         )}
         <FormControl
@@ -172,7 +189,6 @@ export default function MyHeader() {
             size="small"
             labelId="demo-select-small"
             value={lang}
-            // label="Lang"
             onChange={handleChange}
             sx={{ height: 32 }}
           >

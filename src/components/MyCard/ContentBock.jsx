@@ -1,5 +1,5 @@
 import { Box, Typography, CardMedia, Stack } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import TextWithBlur from "../TextWithBlur.jsx";
 
 export default function ContentBock({ text, title, images, id }) {
@@ -8,7 +8,7 @@ export default function ContentBock({ text, title, images, id }) {
       sx={{ color: "#1c1c1c", cursor: "pointer" }}
       onClick={() => console.log("click")}
     >
-      <Link
+      <NavLink
         to={`/review/${id}`}
         style={{ textDecoration: "none", color: "inherit" }}
       >
@@ -47,7 +47,7 @@ export default function ContentBock({ text, title, images, id }) {
             />
           )}
         </Stack>
-      </Link>
+      </NavLink>
     </Box>
   );
 }

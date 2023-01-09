@@ -17,6 +17,7 @@ export const loginGoogle = createAsyncThunk(
           return res;
         });
       if (response.status !== 200) {
+        if (response.status === 401) throw new Error("Unauthorized");
         throw new Error("Server Error!");
       }
       return response.data;

@@ -11,7 +11,7 @@ import {
   getReviews,
   likeReview,
   removeLikeReview,
-} from "../../store/reviewSlice.js";
+} from "../../store/thunks/reviewThunk.js";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function ButtonsBlock({ likes, comments, id }) {

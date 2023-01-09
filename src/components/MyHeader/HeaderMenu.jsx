@@ -52,7 +52,9 @@ export default function HeaderMenu() {
           "aria-labelledby": "basic-button",
         }}
       >
-        <MenuItem onClick={handleClose}>My account page</MenuItem>
+        <MenuItem onClick={handleClose} sx={{ textAlign: "center" }}>
+          My page
+        </MenuItem>
         <MenuItem onClick={handleLogout}>
           <ListItemIcon>
             <Logout fontSize="small" />

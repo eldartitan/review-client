@@ -15,7 +15,7 @@ import MyAutocompleteTags from "../components/CreatePost/MyAutocompleteTags.jsx"
 import MyAutocompleteProduct from "../components/CreatePost/MyAutocompleteProduct.jsx";
 import MyImageList from "../components/CreatePost/MyImageList.jsx";
 import SelectCats from "../components/CreatePost/SelectCats";
-import { postReview } from "../store/reviewSlice.js";
+import { postReview } from "../store/thunks/reviewThunk.js";
 import {
   ref,
   uploadBytes,

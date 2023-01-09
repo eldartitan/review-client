@@ -1,33 +1,31 @@
-import { Chip, Stack, Box, Button } from "@mui/material";
+import { Chip, Stack, Box } from "@mui/material";
 import { AssessmentOutlined, RocketOutlined } from "@mui/icons-material";
-import { MemoryRouter, Navigate, useLocation } from "react-router";
-import { useEffect } from "react";
+import { useLocation } from "react-router";
+import { useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getTags } from "../store/reviewSlice.js";
-import { Link as RouterLink } from "react-router-dom";
+import { getTags } from "../store/thunks/otherThunk.js";
+import { getReviews } from "../store/thunks/reviewThunk.js";
+import { Link, NavLink } from "react-router-dom";
 
 export default function TagsPanel(props) {
   const dispatch = useDispatch();
   const location = useLocation();
-  const { tags } = useSelector((state) => state.review);
 
-  function MyChip({ to, icon, label }) {
-    return (
-      <RouterLink to={to} style={{ textDecoration: "none" }}>
-        <Chip
-          size="small"
-          icon={icon}
-          label={label}
-          color={"default"}
-          onClick={() => null}
-        />
-      </RouterLink>
-    );
-  }
+  const { tags } = useSelector((state) => state.other);
+
+  const cLocate = location.pathname.includes("/c/")
+    ? `${location.pathname.split("/t/")[0]}/t`
+    : "";
+
+  // console.log(location);
+
+  const handleClick = (params) => {
+    dispatch(getReviews(params));
+  };
 
   useEffect(() => {
     dispatch(getTags());
-  }, []);
+  }, [location]);
 
   return (
     <Box
@@ -41,28 +39,53 @@ export default function TagsPanel(props) {
       <Stack direction="row" spacing={1} sx={{ display: "inline-block" }}>
         {location.pathname.includes("/review/") ? (
           props.tags?.map((tag) => (
-            <Chip key={tag} size="small" label={tag} onClick={() => null} />
+            <Link
+              key={tag}
+              to={`/${tag}`}
+              style={{ textDecoration: "none" }}
+              state={{ tags: tag }}
+            >
+              <Chip
+                key={tag}
+                label={tag}
+                size="small"
+                color={"default"}
+                onClick={() => console.log({ tags: tag }, "TAGS VALUE")}
+              />
+            </Link>
           ))
         ) : (
           <>
-            <MyChip
-              to={"/s/rated"}
-              label={"Highly rated"}
+            <Chip
+              size="small"
               icon={<RocketOutlined />}
+              label="Highly rated"
+              color={"default"}
+              onClick={() => handleClick({ sort: "rated" })}
             />
-            <MyChip
-              to={"/s/upload"}
-              label={"Last updated"}
+            <Chip
+              size="small"
               icon={<AssessmentOutlined />}
+              label="Last updated"
+              color={"default"}
+              onClick={() => handleClick({ sort: "upload" })}
             />
 
             {tags?.map((tag) => (
-              <MyChip
+              <Link
                 key={tag._id}
-                to={`/t/${tag.value}`}
-                label={tag.value}
-                icon={null}
-              />
+                to={`${cLocate}/${tag.value}`}
+                style={{ textDecoration: "none" }}
+                state={{ tags: tag.value }}
+              >
+                <Chip
+                  key={tag._id}
+                  size="small"
+                  label={tag.value}
+                  color={"default"}
+                  onClick={() => console.log({ tags: tag.value }, "TAGS VALUE")}
+                />
+              </Link>
             ))}
           </>
         )}

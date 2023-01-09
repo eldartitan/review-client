@@ -11,7 +11,7 @@ export default function InfoBlock({
   product_id,
   rating,
 }) {
-  const { categories, products } = useSelector((state) => state.review);
+  const { categories, products } = useSelector((state) => state.other);
   const category = categories?.filter((f) => f._id === category_id)[0];
   const product = products?.filter((f) => f._id === product_id)[0];
   // console.log(product);
