@@ -32,14 +32,15 @@ const MainPage = () => {
             <Grid item>
               <TagsPanel />
             </Grid>
-            {reviews?.map((review) => {
-              // console.log(review);
-              return (
-                <Grid item key={review._id}>
-                  <MyCard data={review} />
-                </Grid>
-              );
-            })}
+            {!loading &&
+              reviews?.map((review) => {
+                // console.log(review);
+                return (
+                  <Grid item key={review._id}>
+                    <MyCard data={review} />
+                  </Grid>
+                );
+              })}
           </Grid>
         </Container>
       )}
