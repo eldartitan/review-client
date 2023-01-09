@@ -31,7 +31,7 @@ const PostPage = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
   const { user } = useSelector((state) => state.user);
-  const { review, loading, error } = useSelector((state) => state.review);
+  const { review, error } = useSelector((state) => state.review);
   const { product, comments, categories } = useSelector((state) => state.other);
 
   const category = categories?.filter((f) => f._id === review?.category)[0];

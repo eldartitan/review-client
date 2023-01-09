@@ -49,7 +49,6 @@ export default function CreatePost() {
   }, [imageUpload]);
 
   const handleSubmit = (event) => {
-    event.preventDefault();
     const data = {
       text,
       title,
